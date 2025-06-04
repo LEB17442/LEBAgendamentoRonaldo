@@ -2,19 +2,20 @@ package br.unifor.fazeragendamento.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Entity
+
+
+@Document(collection = "agendamentos")
 public class Agendamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private LocalDate data;
 
-    @Enumerated(EnumType.STRING)
     private ServicoEnum servico;
 
     private String nomeFuncionario;
@@ -23,11 +24,11 @@ public class Agendamento {
 
     private String nomeCliente;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

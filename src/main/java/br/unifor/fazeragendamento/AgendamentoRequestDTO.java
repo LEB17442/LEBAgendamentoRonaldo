@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import br.unifor.fazeragendamento.model.ServicoEnum;
 
 public class AgendamentoRequestDTO {
+    
     private LocalDate data;
     private ServicoEnum servico;
     private String nomeFuncionario;
