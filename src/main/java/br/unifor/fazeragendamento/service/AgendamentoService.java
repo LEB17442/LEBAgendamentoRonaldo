@@ -35,7 +35,7 @@ public class AgendamentoService {
     public List<Agendamento> listarTodos() {
         return repository.findAll();
     }
-    public Agendamento pegarDetalhes(String id) {
+    public Agendamento pegarDetalhes(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agendamento não encontrado com o ID: " + id));
     }

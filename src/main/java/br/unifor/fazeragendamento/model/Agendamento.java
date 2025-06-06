@@ -2,17 +2,22 @@ package br.unifor.fazeragendamento.model;
 
 import java.time.LocalDate;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
-
-
-@Document(collection = "agendamentos")
+@Entity
+@Table(name = "agendamentos")
 public class Agendamento {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private LocalDate data;
 
@@ -24,11 +29,11 @@ public class Agendamento {
 
     private String nomeCliente;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,6 +45,7 @@ public class Agendamento {
         this.data = data;
     }
 
+    @Enumerated(EnumType.STRING) // Garante que o enum seja salvo como String no banco
     public ServicoEnum getServico() {
         return servico;
     }
