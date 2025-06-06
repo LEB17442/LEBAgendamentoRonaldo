@@ -1,5 +1,6 @@
 package br.unifor.fazeragendamento.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class AgendamentoService {
         agendamento.setServico(dto.getServico());
         agendamento.setNomePet(dto.getNomePet());
         agendamento.setNomeCliente(dto.getNomeCliente());
+
+                // Define o valor do serviço com base no enum escolhido
+        if (dto.getServico() != null) {
+            agendamento.setValorServico(BigDecimal.valueOf(dto.getServico().getValor()));
+        }
 
         if (dto.getServico() == ServicoEnum.CONSULTA) {
             agendamento.setNomeFuncionario("Veterinário: " + dto.getNomeFuncionario());

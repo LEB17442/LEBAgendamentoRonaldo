@@ -1,5 +1,6 @@
 package br.unifor.fazeragendamento.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -7,6 +8,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -28,6 +30,9 @@ public class Agendamento {
     private String nomePet;
 
     private String nomeCliente;
+
+    @Column(name = "valor_servico")
+    private BigDecimal valorServico;
 
     public Long getId() {
         return id;
@@ -79,6 +84,12 @@ public class Agendamento {
     }
 
     // Getters e Setters
+    public BigDecimal getValorServico() {
+        return valorServico;
+    }
 
-    
+    public void setValorServico(BigDecimal valorServico) {
+        this.valorServico = valorServico;
+    }
+
 }
