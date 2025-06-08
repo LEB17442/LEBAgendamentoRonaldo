@@ -1,49 +1,68 @@
 package br.unifor.fazeragendamento;
 
+import br.unifor.fazeragendamento.model.ServicoEnum;
 import java.time.LocalDate;
 
-import br.unifor.fazeragendamento.model.ServicoEnum;
-
+// Esta classe representa os dados que o frontend envia para criar um agendamento.
 public class AgendamentoRequestDTO {
-    
+
+    // IDs para validação nos outros serviços
+    private Long idCliente;
+    private Long idPet;
+    private Long idFuncionario;
+
+    // Informações específicas do agendamento
     private LocalDate data;
     private ServicoEnum servico;
     private String nomeFuncionario;
-    private String nomePet;
-    private String nomeCliente;
 
-    public LocalDate getData() { 
-        return data; 
-    }
-    public void setData(LocalDate data) { 
-        this.data = data; 
+    // Getters e Setters
+
+    public Long getIdCliente() {
+        return idCliente;
     }
 
-    public ServicoEnum getServico() { 
-        return servico; 
-    }
-    public void setServico(ServicoEnum servico) { 
-        this.servico = servico; 
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public String getNomeFuncionario() { 
-        return nomeFuncionario; 
-    }
-    public void setNomeFuncionario(String nomeFuncionario) { 
-        this.nomeFuncionario = nomeFuncionario; 
+    public Long getIdPet() {
+        return idPet;
     }
 
-    public String getNomePet() { 
-        return nomePet; 
-    }
-    public void setNomePet(String nomePet) { 
-        this.nomePet = nomePet; 
+    public void setIdPet(Long idPet) {
+        this.idPet = idPet;
     }
 
-    public String getNomeCliente() { 
-        return nomeCliente; 
+    public Long getIdFuncionario() {
+        return idFuncionario;
     }
-    public void setNomeCliente(String nomeCliente) { 
-        this.nomeCliente = nomeCliente; 
+
+    public void setIdFuncionario(Long idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public ServicoEnum getServico() {
+        return servico;
+    }
+
+    public void setServico(ServicoEnum servico) {
+        this.servico = servico;
+    }
+
+    public String getNomeFuncionario() {
+        return nomeFuncionario;
+    }
+
+    public void setNomeFuncionario(String nomeFuncionario) {
+        this.nomeFuncionario = nomeFuncionario;
     }
 }
