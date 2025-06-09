@@ -11,7 +11,7 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY --from=build /app/target/agendamento*.jar app.jar
+COPY --from=build /app/target/fazeragendamento*.jar app.jar
 
 EXPOSE 8081
 
