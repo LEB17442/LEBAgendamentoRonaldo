@@ -7,7 +7,7 @@ import br.unifor.fazeragendamento.model.Agendamento;
 import br.unifor.fazeragendamento.repository.AgendamentoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -22,21 +22,21 @@ public class AgendamentoService {
     private final AgendamentoRepository agendamentoRepository;
     private final WebClient webClientContas;
 
-    
+    @Autowired
     public AgendamentoService(AgendamentoRepository agendamentoRepository, WebClient.Builder webClientBuilder) {
         this.agendamentoRepository = agendamentoRepository;
         this.webClientContas = webClientBuilder.baseUrl("http://CONTA/api/contas").build();
     }
 
-    public Agendamento criarAgendamento(AgendamentoRequestDTO dto) { // Agora o Java sabe o que é AgendamentoRequestDTO
+    public Agendamento criarAgendamento(Long userId, AgendamentoRequestDTO dto) { 
         // 1. Validar Cliente e Pet
-        ClienteDTO cliente = validarCliente(dto.getIdCliente());
-        PetDTO pet = validarPetDoCliente(dto.getIdCliente(), dto.getIdPet());
+        ClienteDTO cliente = validarCliente(userId);
+        PetDTO pet = validarPetDoCliente(userId, dto.getIdPet());
 
         // 2. Montar e salvar a entidade Agendamento
         Agendamento agendamento = new Agendamento();
         
-        agendamento.setClienteId(cliente.getId());
+        agendamento.setClienteId(userId);
         agendamento.setNomeCliente(cliente.getNome());
         
         agendamento.setData(dto.getData());

@@ -27,21 +27,12 @@ public class AgendamentoController {
         return dto;
     }
 
-     @PostMapping
-    public ResponseEntity<?> agendar(
-        @RequestBody AgendamentoRequestDTO dto,
-        @RequestHeader("X-User-ID") Long idUsuarioLogado // Lê o cabeçalho injetado pelo Gateway
-    ) {
+    @PostMapping
+    public ResponseEntity<?> agendar(@RequestHeader("X-User-ID") String userId, @RequestBody AgendamentoRequestDTO dto) { 
         try {
-            // Agora você pode usar o idUsuarioLogado na sua lógica de negócio!
-            System.out.println("O usuário com ID " + idUsuarioLogado + " está criando um agendamento.");
-
-            // Valida se o ID do cliente no DTO é o mesmo do usuário logado (Regra de Segurança)
-            if (!dto.getIdCliente().equals(idUsuarioLogado)) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Você não pode agendar para outro cliente.");
-            }
-            return new ResponseEntity<>(service.criarAgendamento(dto), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.criarAgendamento(Long.parseLong(userId), dto), HttpStatus.CREATED);
         } catch (RuntimeException e) {
+            // Retorna a mensagem de erro no corpo da resposta para facilitar a depuração
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
